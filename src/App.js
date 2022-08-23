@@ -1,10 +1,10 @@
-import React from 'react';
 import { useState } from 'react';
+import React from 'react';
+import FeedbackData from './data/FeedbackData';
 import Header from './components/Header';
 import FeedbackList from './components/FeedbackList';
-import FeedbackData from './data/FeedbackData';
 import FeedbackStats from './components/FeedbackStats';
-import Card from './components/Card';
+import FeedbackForm from './components/FeedbackForm';
 
 function App() {
   const [feedbacks, setFeedbacks] = useState(FeedbackData);
@@ -17,10 +17,10 @@ function App() {
     <>
       <Header text="Feedback UI" />
       <div className="container">
+        <FeedbackForm />
         <FeedbackStats feedbacks={feedbacks} />
         <FeedbackList feedbacks={feedbacks} handleDelete={deleteFeedback} />
       </div>
-      <Card>This is a Style Component</Card>
     </>
   );
 }
