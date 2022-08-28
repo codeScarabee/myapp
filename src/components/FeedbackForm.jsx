@@ -32,6 +32,7 @@ function FeedbackForm({ handleAdd }) {
         review,
       };
       handleAdd(newFeedback);
+      setReview('');
     }
   };
   return (
