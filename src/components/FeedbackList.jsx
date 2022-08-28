@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import FeedbackCard from './FeedbackCard';
 
@@ -8,7 +9,7 @@ function FeedbackList({ feedbacks, handleDelete }) {
   return (
     <div className="feedback-ilst">
       {feedbacks.map((feedback) => (
-        <FeedbackCard key={feedback.id} feedback={feedback} handleDelete={handleDelete} />
+        <FeedbackCard key={(feedback.id = uuidv4())} feedback={feedback} handleDelete={handleDelete} />
       ))}
     </div>
   );
@@ -17,9 +18,9 @@ function FeedbackList({ feedbacks, handleDelete }) {
 FeedbackList.propTypes = {
   feedbacks: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       rating: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
+      review: PropTypes.string.isRequired,
     })
   ),
 };
