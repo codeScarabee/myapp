@@ -1,14 +1,16 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import FeedbackContext from '../Context/FeedbackContext';
 import Button from './Button';
 import Card from './Card';
 import RatingSelect from './RatingSelect';
 
-function FeedbackForm({ handleAdd }) {
+function FeedbackForm() {
   const [review, setReview] = useState('');
   const [btnState, setBtnState] = useState(true);
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(10);
+  const { addFeedback } = useContext(FeedbackContext);
   const handleReviewChange = (e) => {
     let value = e.target.value;
     if (!value) {
@@ -31,7 +33,7 @@ function FeedbackForm({ handleAdd }) {
         rating,
         review,
       };
-      handleAdd(newFeedback);
+      addFeedback(newFeedback);
       setReview('');
     }
   };
