@@ -4,6 +4,7 @@ function Header({ text, bgColor, textColor }) {
     backgroundColor: bgColor,
     color: textColor,
   };
+
   return (
     <header style={headerStyle}>
       <div className="container">

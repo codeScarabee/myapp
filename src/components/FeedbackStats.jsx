@@ -8,6 +8,7 @@ function FeedbackStats() {
       return acc + cur.rating;
     }, 0) / feedbacks.length;
   average = parseFloat(average.toFixed(1));
+
   return (
     <div className="feedback-stats">
       <h4>{feedbacks.length} Reviews</h4>

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import FeedbackContext from '../Context/FeedbackContext';
 import Button from './Button';
 import Card from './Card';
@@ -10,7 +10,16 @@ function FeedbackForm() {
   const [btnState, setBtnState] = useState(true);
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(10);
-  const { addFeedback } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext);
+
+  useEffect(() => {
+    if (feedbackEdit.edit === true) {
+      setReview(feedbackEdit.feedback.review);
+      setRating(feedbackEdit.feedback.rating);
+      setBtnState(false);
+    }
+  }, [feedbackEdit]);
+
   const handleReviewChange = (e) => {
     let value = e.target.value;
     if (!value) {
@@ -25,6 +34,7 @@ function FeedbackForm() {
     }
     setReview(value);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (review.trim().length >= 10) {
@@ -33,10 +43,15 @@ function FeedbackForm() {
         rating,
         review,
       };
-      addFeedback(newFeedback);
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.feedback.id, newFeedback);
+      } else {
+        addFeedback(newFeedback);
+      }
       setReview('');
     }
   };
+
   return (
     <Card>
       <form onSubmit={handleSubmit}>
